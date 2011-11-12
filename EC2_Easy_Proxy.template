@@ -26,6 +26,9 @@
       "eu-west-1" : {
           "AMI" : "ami-953b06e1"
       },
+      "us-west-2" : {
+          "AMI" : "ami-30fe7300"
+      },
       "ap-southeast-1" : {
           "AMI" : "ami-0a44f00b"
       },
