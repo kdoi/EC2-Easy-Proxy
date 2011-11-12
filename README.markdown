@@ -20,7 +20,7 @@ s and then install and configure Squid to achieve their goal.
 7. When the status of your stack turns green (CREATE_COMPLETE), then click the outputs tab of the bottom pane of the Management Console to find the IP address of the proxy server.
 8. Configure your web browser to use the proxy. Enjoy!
 
-**Don't forget to "Delete Stack" to make sure that your instance is terminated when you no longer needs the proxy server you launched with this template.**
+**Don't forget to "Delete Stack" to make sure that your instance is terminated when you no longer need the proxy server you launched with this template.**
 
 ## Discussions
 ### EBS-backed vs. Insntance-store?
