@@ -1,0 +1,77 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "Launch an EC2 instance with Squid configured for user specified network and port and a security group.",
+
+  "Parameters" : {
+    "SourceNetwork" : {
+      "Description" : "Squid proxies instances in this network. Example: 123.123.123.0/24",
+      "Type" : "String"
+    },
+    "SquidPort" : {
+        "Description" : "Port number for Squid",
+        "Type" : "Number",
+        "Default" : "3128"
+    }
+  },
+
+  "Mappings" : {
+    "RegionMap" : {
+      "us-east-1" : {
+          "AMI" : "ami-8c1fece5"
+      },
+      "us-west-1" : {
+          "AMI" : "ami-3bc9997e"
+      },
+      "eu-west-1" : {
+          "AMI" : "ami-47cefa33"
+      },
+      "ap-southeast-1" : {
+          "AMI" : "ami-6af08e38"
+      },
+      "ap-northeast-1" : {
+          "AMI" : "ami-300ca731"
+      }
+    }
+  },
+
+  "Resources" : {
+    "Ec2Instance" : {
+      "Type" : "AWS::EC2::Instance",
+      "Properties" : {
+      "InstanceType" : "t1.micro",
+        "SecurityGroups" : [ { "Ref" : "InstanceSecurityGroup" } ],
+        "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "AMI" ]},
+        "UserData" : {"Fn::Base64" : {"Fn::Join" : ["", ["#cloud-config\npackages:\n- squid\n\nruncmd:\n- [sed, -i, \"/RFC 4291/a acl localnet src ", {"Ref" : "SourceNetwork"}, "\", /etc/squid/squid.conf]\n- [sed, -i, \"/^http_port/c http_port ", {"Ref" : "SquidPort"}, "\", /etc/squid/squid.conf]\n- [chkconfig, squid, \"on\"]\n- [service, squid, start]\n"]]}}
+      }
+    },
+
+    "InstanceSecurityGroup" : {
+      "Type" : "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription" : "Allow only Squid port",
+        "SecurityGroupIngress" : [ {
+          "IpProtocol" : "tcp",
+          "FromPort" : {"Ref" : "SquidPort"},
+          "ToPort" : {"Ref" : "SquidPort"},
+          "CidrIp" : {"Ref" : "SourceNetwork"}
+        } ]
+      }
+    }
+  },
+
+  "Outputs" : {
+    "InstanceId" : {
+      "Description" : "InstanceId of the newly created EC2 instance",
+      "Value" : { "Ref" : "Ec2Instance" }
+    },
+    "AZ" : {
+      "Description" : "Availability Zone of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "AvailabilityZone" ] }
+    },
+    "ProxyIPaddress" : {
+      "Description" : "Public IP address of the newly created EC2 instance. Please specify this address as proxy server in your favorite web browser",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "PublicIp" ] }
+    }
+  }
+}
