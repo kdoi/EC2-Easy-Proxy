@@ -18,19 +18,19 @@
   "Mappings" : {
     "RegionMap" : {
       "us-east-1" : {
-          "AMI" : "ami-8c1fece5"
+          "AMI" : "ami-1b814f72"
       },
       "us-west-1" : {
-          "AMI" : "ami-3bc9997e"
+          "AMI" : "ami-1bd68a5e"
       },
       "eu-west-1" : {
-          "AMI" : "ami-47cefa33"
+          "AMI" : "ami-953b06e1"
       },
       "ap-southeast-1" : {
-          "AMI" : "ami-6af08e38"
+          "AMI" : "ami-0a44f00b"
       },
       "ap-northeast-1" : {
-          "AMI" : "ami-300ca731"
+          "AMI" : "ami-beb0caec"
       }
     }
   },
