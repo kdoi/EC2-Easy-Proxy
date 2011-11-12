@@ -13,8 +13,8 @@ s and then install and configure Squid to achieve their goal.
 1. Save the template to your PC/Mac.
 2. Login to the AWS Management Console and open the CloudFormation tab.
 3. Choose one of the AWS regions where you want to launch a proxy server and then hit "Create New Stack" button.
-4. In "SELECT TEMPLATE": Select "*Upload a Template File*" and point to the template file that you save in step 1. You can leave the other fields as they are, but make sure to type in the Stack Name field with any name you feel comfortable.
-5. The next page, "SPECIFY PARAMETERS" asks for template-specific information. With EC2 Easy Proxy, you need to specify the port number you would like to use and your IP address. This template create a firewall called Security Group to restrict other users from using your proxy server.
+4. In "SELECT TEMPLATE": Select "*Upload a Template File*" and point to the template file that you save in step 1. You can leave the other fields as they are, but make sure to type in the *Stack Name* field with any name you feel comfortable.
+5. The next page, "SPECIFY PARAMETERS" asks for template-specific information. With EC2 Easy Proxy, you need to specify the port number you would like to use and your client IP address. This template create a firewall called Security Group to restrict other users from using your proxy server. You can check your own IP address [here](http://whatismyipaddress.com/).
    Note that IP address needs to be specified with subnet mask. In other words, if you want to specify only one IP address ("1.2.3.4"), then the field should be "1.2.3.4/32"
 6. Click Continue twice and finish the wizard.
 7. When the status of your stack turns green (CREATE_COMPLETE), then click the outputs tab of the bottom pane of the Management Console to find the IP address of the proxy server.
