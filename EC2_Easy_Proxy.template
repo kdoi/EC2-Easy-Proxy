@@ -30,10 +30,13 @@
           "AMI" : "ami-30fe7300"
       },
       "ap-southeast-1" : {
-          "AMI" : "ami-0a44f00b"
+          "AMI" : "ami-beb0caec"
       },
       "ap-northeast-1" : {
-          "AMI" : "ami-beb0caec"
+          "AMI" : "ami-0a44f00b"
+      },
+      "ec2.sa-east-1.amazonaws.com" : {
+          "AMI" : "ami-3c3be421"
       }
     }
   },
